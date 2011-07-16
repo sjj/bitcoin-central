@@ -36,4 +36,12 @@ namespace :bitcoin do
       where(:state => "pending").
       delete_all
   end
+
+  desc "Remove pending confirmation account older than 48h"
+  task :remove_old_pending_accounts => :environment do
+    User.
+      where("created_at < ?", DateTime.now.advance(:hours => -48)).
+      where("confirmed_at is null").
+      delete_all
+  end
 end
