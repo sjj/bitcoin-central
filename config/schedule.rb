@@ -19,3 +19,7 @@ end
 every 1.day do
   rake "bitcoin:prune_old_pending_invoices"
 end
+
+every 1.day do
+  rake "bitcoin:remove_old_pending_accounts"
+end
